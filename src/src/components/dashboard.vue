@@ -1,0 +1,16 @@
+<template>
+  <div>
+    <h2 class="page-header">Dashboard</h2>
+    <p>Welcome to your Dashboard</p>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
