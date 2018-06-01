@@ -32,8 +32,6 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-console.log('==888==>')
 require('./config/passport')(passport);
 
 // router

@@ -1,11 +1,12 @@
 <template>
   <div>
+    <nav-bar></nav-bar>
     <div class="jumbotron text-center">
       <h1>MEAN Authentication App</h1>
       <p class="lead">Welcome to our custom MEAN authentication application built from scratch </p>
       <div>
-        <a class="btn btn-primary">Register</a>
-        <a class="btn btn-dark">Login</a>
+        <router-link class="btn btn-primary" to="/register">Register</router-link>
+        <router-link class="btn btn-dark" to="/login">Login</router-link>
       </div>
     </div>
     <div class="row">
@@ -26,8 +27,11 @@
 </template>
 
 <script>
+import navBar from '../components/navbar'
 export default {
-
+  components: {
+    navBar
+  }
 }
 </script>
 

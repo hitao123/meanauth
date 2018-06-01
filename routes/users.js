@@ -18,12 +18,12 @@ router.post('/register', (req, res, next) => {
     if (err) {
       res.json({
         code: '1000',
-        msg: 'register fail'
+        message: 'register fail'
       });
     } else {
       res.json({
         code: '0000',
-        msg: 'register success'
+        message: 'register success'
       });
     }
   })
@@ -33,20 +33,23 @@ router.post('/register', (req, res, next) => {
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   res.json({
     code: '0000',
-    msg: 'profile'
+    message: 'profile',
+    user: req.user
   });
 })
 
 // auth
 router.post('/auth', (req, res, next) => {
+  console.log(req.body)
   const username = req.body.username;
   const password = req.body.password;
   User.getUserByUsername(username, (err, user) => {
     if (err) throw err
+    console.log(user, '>>>>>>>')
     if (!user) {
-      res.json({
+      return res.json({
         code: '1000',
-        msg: 'User not found'
+        message: 'User not found'
       }); 
     }
     User.comparePassword(password, user.password, (err, isMatch) => {
@@ -55,9 +58,10 @@ router.post('/auth', (req, res, next) => {
         const token = jwt.sign({data: user}, config.secret, {
           expiresIn: 604800 // one week
         });
+        // 这里 JWT 需要加空格 困扰我多年
         res.json({
           code: '0000',
-          token: 'JWT' + token,
+          token: 'JWT ' + token,
           user: {
             id: user._id,
             name: user.name,
@@ -68,7 +72,7 @@ router.post('/auth', (req, res, next) => {
       } else {
         res.json({
           code: '1000',
-          msg: 'Wrong password'
+          message: 'Wrong password'
         });
       }
     });
