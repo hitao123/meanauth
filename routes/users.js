@@ -45,7 +45,6 @@ router.post('/auth', (req, res, next) => {
   const password = req.body.password;
   User.getUserByUsername(username, (err, user) => {
     if (err) throw err
-    console.log(user, '>>>>>>>')
     if (!user) {
       return res.json({
         code: '1000',
@@ -58,7 +57,7 @@ router.post('/auth', (req, res, next) => {
         const token = jwt.sign({data: user}, config.secret, {
           expiresIn: 604800 // one week
         });
-        // 这里 JWT 需要加空格 困扰我多年
+        // 这里 JWT 需要加空格
         res.json({
           code: '0000',
           token: 'JWT ' + token,

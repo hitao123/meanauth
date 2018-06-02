@@ -40,7 +40,6 @@ export default {
         username: this.username,
         password: this.password
       }
-      console.log(parmas, 'fuuuuk')
       this.$store.dispatch('AUTHENTIC', parmas)
         .then((res) => {
           if (res && res.code === '0000') {
